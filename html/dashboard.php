@@ -38,14 +38,17 @@ if ($conn->connect_error) {
 }
 $sql = "SELECT * FROM items ";
 $result = $conn->query($sql);
+$row = mysqli_fetch_array($result);
 if ($result->num_rows > 0) {
     echo "<table><tr><th>ID</th><th>Name</th><th>Image</th><th>Price</th><th>Action</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
+        $image = $row['image'];
+        $image_src = "uploads/".$image;
         echo "<tr>";
         echo "<td>" . $row['id'] . "</td>";
         echo "<td>" . $row['name'] . "</td>";
-        echo "<td><img src='".$row['image']."'width=80 height=80 > </td>";
+        echo "<td><img src='".$image_src."'width=80 height=80 > </td>";
         echo "<td>" . $row['price'] . "</td>";
         echo "<td><a href='lib/deleteItem.php?id=".$row['id']."'><input type='button' value='Delete'/></a>
         <a href='editItem.php?id=".$row['id']."'><input type='button' value='Edit'/></a></td>";

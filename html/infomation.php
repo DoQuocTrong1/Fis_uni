@@ -35,9 +35,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 $sql = "SELECT * FROM users ";
+$sql1 = "SELECT * FROM users where username = '".$_SESSION['username']."'  ";
 $result = $conn->query($sql);
+$result1 = $conn->query($sql1);
 
 if ($result->num_rows > 0) {
+    while($row1 = $result1->fetch_assoc()) {
+    if($row1['level'] == '1') {
     echo "<table><tr><th>ID</th><th>UserName</th><th>Password</th><th>Name</th><th>Email</th><th>Level</th><th>Action</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
@@ -58,6 +62,27 @@ if ($result->num_rows > 0) {
         echo "</tr>";
     }
     echo "</table>";
+}else{
+    echo "<table><tr><th>ID</th><th>UserName</th><th>Password</th><th>Name</th><th>Email</th><th>Level</th></tr>";
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        // echo "<tr><td>".$row["id"]."</td><td>".$row["name"]."</td><td>".$row["email"]."</td><td>". "" ."</td></tr>";
+        echo "<tr>";
+        echo "<td>" . $row['id'] . "</td>";
+        echo "<td>" . $row['username'] . "</td>";
+        echo "<td>" . $row['password'] . "</td>";
+        echo "<td>" . $row['name'] . "</td>";
+        echo "<td>" . $row['email'] . "</td>";
+        if($row['level'] ==0){
+            echo "<td>Thành viên</td>";
+        }else{
+            echo "<td>Admin</td>";
+        }
+        echo "</tr>";
+    }
+    echo "</table>";
+}
+}
 } else {
     echo "0 results";
 }

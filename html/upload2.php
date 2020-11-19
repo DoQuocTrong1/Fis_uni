@@ -23,8 +23,8 @@ if (!isset($_SESSION['username'])) {
 		<div class="main-agileinfo">
 			<div class="agileits-top">
                 <form action="upload.php" method="post" enctype="multipart/form-data">
-                    <p><input  type="text" name="item_price" placeholder="Tên sản phẩm"  ></p>
-					<p><input class="number" type="text" name="item_price" placeholder="Giá sản phẩm"  ></p>
+                    <p><input  type="text" name="itemname" placeholder="Tên sản phẩm"></p>
+					<p><input class="number" type="text" name="itemprice" placeholder="Giá sản phẩm"></p>
                         <text style="color: #ffffff">Select image to upload:</text>
                         <input type="file" name="fileToUpload" id="fileToUpload">
                         <input type="submit" value="Upload Image" name="submit">
